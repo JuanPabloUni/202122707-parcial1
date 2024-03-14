@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import Link component from react-router-dom
 
+// Modal component
 const Modal = ({ imageUrl, onClose }) => {
   return (
     <div className="modal">
@@ -11,11 +13,13 @@ const Modal = ({ imageUrl, onClose }) => {
   );
 };
 
-const ProfilePage = () => {
+const Home = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfilePicture = async () => {
@@ -30,7 +34,7 @@ const ProfilePage = () => {
       } catch (error) {
         console.error('Error fetching profile picture:', error);
       }
-    }
+    };
 
     const fetchImages = async () => {
       try {
@@ -49,7 +53,7 @@ const ProfilePage = () => {
       } catch (error) {
         console.error('Error fetching images:', error);
       }
-    }
+    };
 
     const fetchProfileData = async () => {
       try {
@@ -64,46 +68,62 @@ const ProfilePage = () => {
       } catch (error) {
         console.error('Error fetching profile data:', error);
       }
-    }
+    };
 
     fetchProfilePicture();
     fetchImages();
     fetchProfileData();
+
   }, []);
 
   const openModal = (imageUrl) => {
     setSelectedImage(imageUrl);
-  }
+  };
 
   const closeModal = () => {
     setSelectedImage(null);
+  };
+
+  // Handle click event on profile picture
+  const handleClick = () => {
+    profileData['profilePicture'] = profilePicture;
+    navigate('/profile', { state: { profileData }});
+    // Add your logic here
+  };
+
+  // Render nothing if profileData is null
+  if (!profileData) {
+    return null;
   }
 
   return (
     <div className="profile-page">
       {/* Profile Information */}
       <div className="profile-header">
-        <img src={profilePicture} alt="Profile" className="profile-picture" />
-        {profileData && (
-          <div className="profile-info">
-            <h2 className="username">{profileData.userName}</h2>
-            <p className="bio">{profileData.bio}</p>
-            <div className="counts">
-              <div className="count">
-                <span className="number">{profileData.posts}</span>
-                <span className="label"> Posts</span>
-              </div>
-              <div className="count">
-                <span className="number">{profileData.followers}</span>
-                <span className="label"> Followers</span>
-              </div>
-              <div className="count">
-                <span className="number">{profileData.following}</span>
-                <span className="label"> Following</span>
-              </div>
+          <img
+            src={profilePicture}
+            alt="Profile"
+            className="profile-picture"
+            onClick={handleClick} // Add onClick event handler
+          />
+        <div className="profile-info">
+          <h2 className="username">{profileData.userName}</h2>
+          <p className="bio">{profileData.bio}</p>
+          <div className="counts">
+            <div className="count">
+              <span className="number">{profileData.posts}</span>
+              <span className="label"> Posts</span>
+            </div>
+            <div className="count">
+              <span className="number">{profileData.followers}</span>
+              <span className="label"> Followers</span>
+            </div>
+            <div className="count">
+              <span className="number">{profileData.following}</span>
+              <span className="label"> Following</span>
             </div>
           </div>
-        )}
+        </div>
       </div>
       {/* Enlarged Image Modal */}
       {selectedImage && <Modal imageUrl={selectedImage} onClose={closeModal} />}
@@ -123,4 +143,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default Home;

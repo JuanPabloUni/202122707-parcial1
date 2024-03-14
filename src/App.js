@@ -1,18 +1,17 @@
 import './App.css';
 
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import home from './home';
-import profile from './profile';
+import { Routes, Route } from 'react-router-dom';
+import Home from './home';
+import Profile from './profile';
 
 const App = () => {
   return (
-    <BrowserRouter>
        <Routes>
-         <Route path="/" element={<home />} />
-         <Route path="/profile" element={<profile />} />
+         <Route path="/" element={<Home />} />
+         <Route path="/profile" element={<Profile />} />
+         <Route path="*" element={<Home />} />
        </Routes>
-     </BrowserRouter>
   );
 };
 
