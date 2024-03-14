@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+// Modal component
 const Modal = ({ imageUrl, onClose }) => {
   return (
     <div className="modal">
@@ -81,6 +82,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-page">
+      {/* Profile Information */}
       <div className="profile-header">
         <img src={profilePicture} alt="Profile" className="profile-picture" />
         {profileData && (
@@ -104,6 +106,9 @@ const ProfilePage = () => {
           </div>
         )}
       </div>
+      {/* Enlarged Image Modal */}
+      {selectedImage && <Modal imageUrl={selectedImage} onClose={closeModal} />}
+      {/* Image Grid */}
       <div className="image-grid">
         {images.map((image, index) => (
           <img
@@ -115,7 +120,6 @@ const ProfilePage = () => {
           />
         ))}
       </div>
-      {selectedImage && <Modal imageUrl={selectedImage} onClose={closeModal} />}
     </div>
   );
 };
