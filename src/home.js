@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-// Modal component
 const Modal = ({ imageUrl, onClose }) => {
   return (
     <div className="modal">
       <div className="modal-content">
         <span className="close" onClick={onClose}>&times;</span>
-        <img src={imageUrl} alt="Enlarged" />
+        <img src={imageUrl} alt="Enlarged" className="enlarged-image" />
       </div>
     </div>
   );
