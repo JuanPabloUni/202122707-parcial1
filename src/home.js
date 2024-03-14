@@ -1,46 +1,51 @@
-
 import React, { useState, useEffect } from 'react';
 
 const ProfilePage = () => {
-  const [profilePicture, setProfilePicture] = useState(null);
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    const fetchProfilePicture = async () => {
+    const fetchProfileData = async () => {
       try {
-        const response = await fetch('https://picsum.photos/350');
+        const response = await fetch('https://raw.githubusercontent.com/JuanPabloUni/202122707-parcial1/master/data.json'); // Fetch JSON file
         if (response.ok) {
-          const blob = await response.blob();
-          setProfilePicture(URL.createObjectURL(blob));
+          const data = await response.json();
+          const randomIndex = Math.floor(Math.random() * data.length); // Generate random index
+          setProfileData(data[randomIndex]);
         } else {
-          console.error('Failed to fetch profile picture');
+          console.error('Failed to fetch profile data');
         }
       } catch (error) {
-        console.error('Error fetching profile picture:', error);
+        console.error('Error fetching profile data:', error);
       }
     };
 
-    fetchProfilePicture();
+    fetchProfileData();
   }, []);
+
+  if (!profileData) {
+    return <div>Loading...</div>; // Display loading indicator while fetching data
+  }
+
+  const { userName, bio, posts, followers, following } = profileData;
 
   return (
     <div className="profile-page">
       <div className="profile-header">
-        <img src={profilePicture} alt="Profile" className="profile-picture" />
         <div className="profile-info">
-          <h2 className="username">Username</h2>
-          <p className="bio">Bio</p>
+          <h2 className="username">{userName}</h2>
+          <p className="bio">{bio}</p>
           <div className="counts">
             <div className="count">
-              <span className="number">Posts Count</span>
-              <span className="label">Posts</span>
+              <span className="number">{posts}</span>
+              <span className="label"> Posts</span>
             </div>
             <div className="count">
-              <span className="number">Followers Count</span>
-              <span className="label">Followers</span>
+              <span className="number">{followers}</span>
+              <span className="label"> Followers</span>
             </div>
             <div className="count">
-              <span className="number">Following Count</span>
-              <span className="label">Following</span>
+              <span className="number">{following}</span>
+              <span className="label"> Following</span>
             </div>
           </div>
         </div>
