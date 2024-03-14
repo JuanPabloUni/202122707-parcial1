@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
+const Modal = ({ imageUrl, onClose }) => {
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={onClose}>&times;</span>
+        <img src={imageUrl} alt="Enlarged" />
+      </div>
+    </div>
+  );
+};
+
 const ProfilePage = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchProfilePicture = async () => {
@@ -41,7 +53,7 @@ const ProfilePage = () => {
 
     const fetchProfileData = async () => {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/JuanPabloUni/202122707-parcial1/master/data.json'); // Fetch JSON file
+        const response = await fetch('https://raw.githubusercontent.com/JuanPabloUni/202122707-parcial1/master/data.json');
         if (response.ok) {
           const data = await response.json();
           const randomIndex = Math.floor(Math.random() * data.length);
@@ -58,6 +70,14 @@ const ProfilePage = () => {
     fetchImages();
     fetchProfileData();
   }, []);
+
+  const openModal = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  }
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  }
 
   return (
     <div className="profile-page">
@@ -91,9 +111,11 @@ const ProfilePage = () => {
             src={image}
             alt={`${index + 1}`}
             className="image"
+            onClick={() => openModal(image)}
           />
         ))}
       </div>
+      {selectedImage && <Modal imageUrl={selectedImage} onClose={closeModal} />}
     </div>
   );
 };
