@@ -1,46 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation hook from react-router-dom
+import { useLocation } from 'react-router-dom';
 
 const ProfilePage = () => {
   const location = useLocation();
   const state = location.state;
   const profileData = state ? state.profileData : null;
-  
 
-  // State variables to store profile data and edit mode
   const [profilePicture, setProfilePicture] = useState('');
   const [username, setUsername] = useState('');
   const [bio, setBio] = useState('');
-  const [editable, setEditable] = useState(false); // Flag to determine edit mode
+  const [editable, setEditable] = useState(false);
+  const [language, setLanguage] = useState('english');
 
-  // Set profile data from location state
   useEffect(() => {
     if (profileData) {
       setProfilePicture(profileData.profilePicture);
       setUsername(profileData.userName);
       setBio(profileData.bio);
-      // Randomly determine whether the profile data should be editable or not
       setEditable(Math.random() < 0.5);
     }
   }, [profileData]);
 
-  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle form submission here, for example, send the data to the server
-    // In this example, we are just logging the values
     console.log('Username:', username);
     console.log('Bio:', bio);
     console.log('Profile picture:', profilePicture);
   };
 
-  // Render editable or non-editable profile info based on the editable flag
+  const toggleLanguage = () => {
+    setLanguage(language === 'english' ? 'spanish' : 'english');
+  };
+
   const renderProfileInfo = () => {
     if (editable) {
       return (
         <form onSubmit={handleSubmit} className="form-container">
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="username">{language === 'english' ? 'Username' : 'Nombre de usuario'}:</label>
             <input
               type="text"
               id="username"
@@ -50,7 +47,7 @@ const ProfilePage = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="bio">Bio:</label>
+            <label htmlFor="bio">{language === 'english' ? 'Bio' : 'Biografía'}:</label>
             <textarea
               id="bio"
               value={bio}
@@ -58,14 +55,14 @@ const ProfilePage = () => {
               className="input-field"
             ></textarea>
           </div>
-          <button type="submit">Save</button>
+          <button type="submit">{language === 'english' ? 'Save' : 'Guardar'}</button>
         </form>
       );
     } else {
       return (
         <div className="profile-info">
-          <p>Username: {username}</p>
-          <p>Bio: {bio}</p>
+          <p>{language === 'english' ? `Username: ${username}` : `Nombre de usuario: ${username}`}</p>
+          <p>{language === 'english' ? `Bio: ${bio}` : `Biografía: ${bio}`}</p>
         </div>
       );
     }
@@ -76,12 +73,22 @@ const ProfilePage = () => {
       <br />
       {/* Display profile picture */}
       <div className="profile-info">
-        <img src={profilePicture} alt="Profile" className="profile-picture" />
+        <img
+          src={profilePicture}
+          alt="Profile"
+          className="profile-picture"
+          style={{ display: "block", margin: "auto" }}
+        />
       </div>
       {/* Render editable or non-editable profile info */}
       {renderProfileInfo()}
+      <button className="language-toggle" onClick={toggleLanguage}>
+        {language === "english" ? "Español" : "English"}
+      </button>
       <br />
-      <a href="/">Back to Home</a>
+      <a href="/">
+        {language === "english" ? "Back to Home" : "Regresar al Inicio"}
+      </a>
     </div>
   );
 };

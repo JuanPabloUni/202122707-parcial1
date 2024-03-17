@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import Link component from react-router-dom
+import { useNavigate } from 'react-router-dom';
 
-// Modal component
 const Modal = ({ imageUrl, onClose }) => {
   return (
     <div className="modal">
@@ -18,7 +17,7 @@ const Home = () => {
   const [profileData, setProfileData] = useState(null);
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [language, setLanguage] = useState('english');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,43 +83,46 @@ const Home = () => {
     setSelectedImage(null);
   };
 
-  // Handle click event on profile picture
   const handleClick = () => {
     profileData['profilePicture'] = profilePicture;
     navigate('/profile', { state: { profileData }});
-    // Add your logic here
   };
 
-  // Render nothing if profileData is null
+  const toggleLanguage = () => {
+    setLanguage(language === 'english' ? 'spanish' : 'english');
+  };
+
   if (!profileData) {
     return null;
   }
 
   return (
     <div className="profile-page">
+      {/* Language toggle button */}
+      <button className="language-toggle" onClick={toggleLanguage}>{language === 'english' ? 'Español' : 'English'}</button>
       {/* Profile Information */}
       <div className="profile-header">
-          <img
-            src={profilePicture}
-            alt="Profile"
-            className="profile-picture"
-            onClick={handleClick} // Add onClick event handler
-          />
+        <img
+          src={profilePicture}
+          alt="Profile"
+          className="profile-picture"
+          onClick={handleClick}
+        />
         <div className="profile-info">
           <h2 className="username">{profileData.userName}</h2>
           <p className="bio">{profileData.bio}</p>
           <div className="counts">
             <div className="count">
               <span className="number">{profileData.posts}</span>
-              <span className="label"> Posts</span>
+              <span className="label">{language === 'english' ? ' Posts' : ' Publicaciones'}</span>
             </div>
             <div className="count">
               <span className="number">{profileData.followers}</span>
-              <span className="label"> Followers</span>
+              <span className="label">{language === 'english' ? ' Followers' : ' Seguidores'}</span>
             </div>
             <div className="count">
               <span className="number">{profileData.following}</span>
-              <span className="label"> Following</span>
+              <span className="label">{language === 'english' ? ' Following' : ' Siguiendo'}</span>
             </div>
           </div>
         </div>
