@@ -49,7 +49,9 @@ Se usó CSS para el diseño de la página, y se utilizó el estado de los compon
 
 Para cumplir con los requerimientos del parcial, se crearon dos componentes de REACT principales: home.js y profile.js. El primero maneja la información de la página principal, y el segundo maneja la información de la página de perfil.
 
-home.js se encarga de traer aleatoriamente la información de un usuario y de hacer 13 peticiones para traer aleatoriamente 12 publicaciones y una foto de perfil para dicho usuario. home.js se divide entre un header donde se encuentra toda la información del usuario y un mapa de publicaciones el cual se ajusta al tamaño de la pantalla. Adicionalmente, se declaró un modal para mostrar la publicación en tamaño completo que se activa al dar click en una publicación.
+home.js se encarga de traer aleatoriamente la información de un usuario (haciendo una petición a un archivo JSON con 5 usuarios) y de hacer 13 peticiones para traer aleatoriamente 12 publicaciones y una foto de perfil para dicho usuario. home.js se divide entre un header donde se encuentra toda la información del usuario y un mapa de publicaciones el cual se ajusta al tamaño de la pantalla.
+
+Adicionalmente, se declaró un subcomponente de modal para mostrar las publicaciones en mayor tamaño. Este subcomponente recibe la información de la publicación a mostrar (para asegurar que la foto maximizada sea la misma que la que se seleccionó de la lista de publicaciones) y la muestra en un formato diferente y aislado, con un botón para cerrar el modal.
 
 Al dar click sobre la foto del usuario, se hacer un llamado al router para navegar a la página de perfil, la cual se encuentra en profile.js. Se asegura de pasar como estado la información del usuario para que esta pueda ser mostrada en la página de perfil.
 
@@ -60,6 +62,10 @@ La página de perfil utiliza un form-container para manejar el estado de los cam
 En profile.js, se utiliza un generador de números aleatorios para determinar si los campos de nombre de usuario y biografía se pueden editar o no. Si no se pueden editar, no se muestra el botón de "Guardar".
 
 Tanto home.js como profile.js tienen un botón para cambiar el idioma de la página, el cual se implementó con un estado que cambia entre "english" y "spanish" y que se pasa como un condicional a cada label estático de la página.
+
+La App.js maneja el enrutamiento entre las páginas de home y profile, y se asegura de definir la ruta por defecto en caso de que no se encuentre ninguna ruta definida (en este caso, la ruta por defecto es la de home). Es por esto que en index.js se importa App.js y se renderiza dentro de un BrowserRouter.
+
+Se usó un único archivo de CSS para el diseño de la aplicación, el cual define un estilo para cada componente y subcomponente de la aplicación.
 
 ## Tecnologías Utilizadas
 
