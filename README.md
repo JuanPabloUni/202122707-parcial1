@@ -1,45 +1,45 @@
 # Juan Pablo Hernández T. - 202122707
 
-# Parcial 1 - Desarrollo de Aplicaciones Web
+# Parcial 1 - Programación con Tecnologías Web
 
-## Introduction
+## Introducción
 
-Briefly introduce your project here, mentioning its purpose and main features.
+Repositorio público para el desarrollo del primer parcial de la asignatura de Programación con Tecnologías Web.
 
-## Installation
+## Instalación
 
-### Prerequisites
+### Pre-requisitos
 - REACT (Boostrap, Scripts, Router Dom)
 - npm
 
-### Steps
-1. Clone the repository:
+### Paso a paso
+1. Clonar el repositorio en la máquina local:
    ```bash
    git clone https://github.com/JuanPabloUni/202122707-parcial1
    ```
-2. Navigate to the project directory:
+2. Navegar al directorio del proyecto:
    ```bash
    cd 202122707-parcial1
    ```
-3. Install dependencies:
+3. Instalar las dependencias del proyecto:
    ```bash
    npm install
    ```
 
-4. Start the development server:
+4. Iniciar la aplicación:
    ```bash
    npm start
    ```
 
-## Usage
+## Uso
 
 Explain how to use the application once it's running. Provide instructions on navigating through different pages/screens and interacting with the UI.
 
-## Project Structure
+## Decisiones de diseño y procesos de desarrollo
 
 Describe the structure of your project's codebase, highlighting important directories and files related to components, routes, and data fetching.
 
-## Technologies Used
+## Tecnologías Utilizadas
 
 - React.js
 - React Router
