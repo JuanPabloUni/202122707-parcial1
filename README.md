@@ -33,7 +33,11 @@ Repositorio público para el desarrollo del primer parcial de la asignatura de P
 
 ## Uso
 
-Explain how to use the application once it's running. Provide instructions on navigating through different pages/screens and interacting with the UI.
+La página principal de la aplicación es `http://localhost:3000/`. Ahí se puede ver una imitación de un perfil de Instagram, con una foto de perfil, información del usuario (nombre de usuario, biografía, seguidores, seguidos, publicaciones), y una lista de publicaciones. Toda la información presentada aquí es escogida aleatoriamente de un conjunto de datos predeteriminado, y las imágenes son traídas remotamente, también de forma aleatoria.
+
+En esta vista, se puede dar click a una publicación para verla en mayor tamaño. Adicionalmente, hay un botón al superior derecho que permite cambiar el idioma de la página entre inglés y español. Al dar click en la foto de perfil, se navega a la dirección `http://localhost:3000/profile`.
+
+En la vista de perfil, se puede ver la misma información que en la página principal, pero con un formato diferente. Aquí es posible editar el nombre de usuario y la biografía, y al dar click en el botón de "Guardar", se logea un mensaje en la consola con la información actualizada. En esta página también hay un botón para regresar a la página principal y otro para cambiar el idioma de la página. Adicionalmente, cada vez que se carga esta página, existe un 50% de probabilidad de que los campos de nombre de usuario y biografía no se puedan editar y por ende, no se muestre el botón de "Guardar".
 
 ## Decisiones de diseño y procesos de desarrollo
 
