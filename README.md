@@ -37,11 +37,29 @@ La página principal de la aplicación es `http://localhost:3000/`. Ahí se pued
 
 En esta vista, se puede dar click a una publicación para verla en mayor tamaño. Adicionalmente, hay un botón al superior derecho que permite cambiar el idioma de la página entre inglés y español. Al dar click en la foto de perfil, se navega a la dirección `http://localhost:3000/profile`.
 
-En la vista de perfil, se puede ver la misma información que en la página principal, pero con un formato diferente. Aquí es posible editar el nombre de usuario y la biografía, y al dar click en el botón de "Guardar", se logea un mensaje en la consola con la información actualizada. En esta página también hay un botón para regresar a la página principal y otro para cambiar el idioma de la página. Adicionalmente, cada vez que se carga esta página, existe un 50% de probabilidad de que los campos de nombre de usuario y biografía no se puedan editar y por ende, no se muestre el botón de "Guardar".
+En la vista de perfil, se puede ver casi la misma información que en la página principal, pero con un formato diferente. Aquí es posible editar el nombre de usuario y la biografía, y al dar click en el botón de "Guardar", se logea un mensaje en la consola con la información actualizada. En esta página también hay un botón para regresar a la página principal y otro para cambiar el idioma de la página. Adicionalmente, cada vez que se carga esta página, existe un 50% de probabilidad de que los campos de nombre de usuario y biografía no se puedan editar y por ende, no se muestre el botón de "Guardar".
 
 ## Decisiones de diseño y procesos de desarrollo
 
-Describe the structure of your project's codebase, highlighting important directories and files related to components, routes, and data fetching.
+Para el desarrollo de este parcial, se utilizaron paquetes de npm como `react-router-dom` para la navegación entre páginas, y `bootstrap` para el diseño de la página.
+
+Se utilizó el Fetch API para traer los datos de los usuarios y las publicaciones, y se empleó el estado de los componentes de React para manejar la información de los usuarios y las publicaciones.
+
+Se usó CSS para el diseño de la página, y se utilizó el estado de los componentes de React para manejar la información de los usuarios y las publicaciones.
+
+Para cumplir con los requerimientos del parcial, se crearon dos componentes de REACT principales: home.js y profile.js. El primero maneja la información de la página principal, y el segundo maneja la información de la página de perfil.
+
+home.js se encarga de traer aleatoriamente la información de un usuario y de hacer 13 peticiones para traer aleatoriamente 12 publicaciones y una foto de perfil para dicho usuario. home.js se divide entre un header donde se encuentra toda la información del usuario y un mapa de publicaciones el cual se ajusta al tamaño de la pantalla. Adicionalmente, se declaró un modal para mostrar la publicación en tamaño completo que se activa al dar click en una publicación.
+
+Al dar click sobre la foto del usuario, se hacer un llamado al router para navegar a la página de perfil, la cual se encuentra en profile.js. Se asegura de pasar como estado la información del usuario para que esta pueda ser mostrada en la página de perfil.
+
+Una vez en la página de perfil, se muestra la información del usuario en un formato diferente, y se permite editar el nombre de usuario y la biografía. Tanto la foto de perfil, como el nombre de usuario y la biografía llegan igual a cómo se presentaban en la página principal, gracias al estado que se pasó desde home.js.
+
+La página de perfil utiliza un form-container para manejar el estado de los campos de nombre de usuario y biografía, y un botón para logear los cambios una vez se se hace submit al formulario.
+
+En profile.js, se utiliza un generador de números aleatorios para determinar si los campos de nombre de usuario y biografía se pueden editar o no. Si no se pueden editar, no se muestra el botón de "Guardar".
+
+Tanto home.js como profile.js tienen un botón para cambiar el idioma de la página, el cual se implementó con un estado que cambia entre "english" y "spanish" y que se pasa como un condicional a cada label estático de la página.
 
 ## Tecnologías Utilizadas
 
